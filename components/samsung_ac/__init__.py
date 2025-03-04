@@ -423,6 +423,7 @@ async def to_code(config):
         # Mapping of config keys to their corresponding methods and types
         device_actions = {
             CONF_DEVICE_POWER: (switch.new_switch, var_dev.set_power_switch),
+            CONF_DEVICE_POWER2: (switch.new_switch, var_dev.set_power_switch),
             CONF_DEVICE_AUTOMATIC_CLEANING: (
                 switch.new_switch,
                 var_dev.set_automatic_cleaning_switch,
@@ -497,7 +498,16 @@ async def to_code(config):
                 conf, min_value=16.0, max_value=30.0, step=1.0
             )
             cg.add(var_dev.set_target_temperature_number(num))
-
+            
+        if CONF_DEVICE_TARGET_TEMPERATURE2 in device:
+            conf = device[CONF_DEVICE_TARGET_TEMPERATURE2]
+            conf[CONF_UNIT_OF_MEASUREMENT] = UNIT_CELSIUS
+            conf[CONF_DEVICE_CLASS] = DEVICE_CLASS_TEMPERATURE2
+            num = await number.new_number(
+                conf, min_value=16.0, max_value=30.0, step=1.0
+            )
+            cg.add(var_dev.set_target_temperature_number(num))
+    
         if CONF_DEVICE_WATER_OUTLET_TARGET in device:
             conf = device[CONF_DEVICE_WATER_OUTLET_TARGET]
             conf[CONF_UNIT_OF_MEASUREMENT] = UNIT_CELSIUS
@@ -513,6 +523,12 @@ async def to_code(config):
             sel = await select.new_select(conf, options=values)
             cg.add(var_dev.set_mode_select(sel))
 
+        if CONF_DEVICE_MODE2 in device:
+            conf = device[CONF_DEVICE_MODE2]
+            values = ["Auto", "Cool", "Dry", "Fan", "Heat"]
+            sel = await select.new_select(conf, options=values)
+            cg.add(var_dev.set_mode_select(sel))
+            
         if CONF_DEVICE_WATER_HEATER_MODE in device:
             conf = device[CONF_DEVICE_WATER_HEATER_MODE]
             values = ["Eco", "Standard", "Power", "Force"]
