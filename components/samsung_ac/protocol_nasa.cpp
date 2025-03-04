@@ -775,6 +775,11 @@ namespace esphome
                     LOG_MESSAGE(VAR_IN_FSV_3023, value, source, dest);
                     break;
 
+                case 0x40c4:
+                    value = (double)message.value / 10.0;
+                    LOG_MESSAGE(VAR_IN_FSV_3023, value, source, dest);
+                    break;
+
                 case 0x8411:
                     value = (double)message.value;
                     LOG_MESSAGE(NASA_OUTDOOR_CONTROL_WATTMETER_1UNIT, value, source, dest);
@@ -1082,6 +1087,12 @@ namespace esphome
             case 0x40bc:
             case 0x40bd:
             case 0x40d5:
+            case 0x40c4:
+                {
+                double temp = (double)message.value / (double)10;
+                LOG_MESSAGE(VAR_OUT_SENSOR_PIPEIN3, temp, source, dest);
+                break;
+            }
             case 0x410a:
             case 0x410b:
             case 0x410c:
