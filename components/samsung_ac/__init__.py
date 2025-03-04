@@ -234,9 +234,11 @@ DEVICE_SCHEMA = cv.Schema(
         ),
         cv.Optional(CONF_DEVICE_ERROR_CODE): error_code_sensor_schema(0x8235),
         cv.Optional(CONF_DEVICE_TARGET_TEMPERATURE): NUMBER_SCHEMA,
+        cv.Optional(CONF_DEVICE_TARGET_TEMPERATURE2): NUMBER_SCHEMA,
         cv.Optional(CONF_DEVICE_WATER_OUTLET_TARGET): NUMBER_SCHEMA,
         cv.Optional(CONF_DEVICE_WATER_TARGET_TEMPERATURE): NUMBER_SCHEMA,
         cv.Optional(CONF_DEVICE_POWER): switch.switch_schema(Samsung_AC_Switch),
+        cv.Optional(CONF_DEVICE_POWER2): switch.switch_schema(Samsung_AC_Switch),
         cv.Optional(CONF_DEVICE_AUTOMATIC_CLEANING): switch.switch_schema(
             Samsung_AC_Switch
         ),
@@ -244,6 +246,7 @@ DEVICE_SCHEMA = cv.Schema(
             Samsung_AC_Switch
         ),
         cv.Optional(CONF_DEVICE_MODE): SELECT_MODE_SCHEMA,
+        cv.Optional(CONF_DEVICE_MODE2): SELECT_MODE_SCHEMA,
         cv.Optional(CONF_DEVICE_WATER_HEATER_MODE): SELECT_WATER_HEATER_MODE_SCHEMA,
         cv.Optional(CONF_DEVICE_CLIMATE): CLIMATE_SCHEMA,
         cv.Optional(CONF_DEVICE_CUSTOM, default=[]): cv.ensure_list(
